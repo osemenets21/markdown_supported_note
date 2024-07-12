@@ -8,7 +8,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import { v4 as uuidV4 } from "uuid";
 import { NoteList } from "./NoteList";
 import { NoteLayout } from "./NoteLayout";
-import { Note } from "./Note";
+import { NoteComponent } from "./Note";
 import { EditNote } from "./EditNote";
 
 export type Note = {
@@ -118,7 +118,7 @@ function App() {
           }
         />
         <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
-          <Route index element={<Note onDelete={onDeleteNote} />} />
+          <Route index element={<NoteComponent onDelete={onDeleteNote} />} />
           <Route
             path="edit"
             element={
