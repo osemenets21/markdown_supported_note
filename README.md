@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Markdown Supported Note App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a simple React-based web application for creating, editing, and managing markdown-supported notes. Each note can have a title, tags, and a description. The notes, along with their tags, can be edited and deleted. All data is stored in LocalStorage, ensuring that your notes persist even after refreshing the page.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+1) Create Notes: Add new notes with a title, tags, and a description.
+2) Edit Notes: Modify existing notes, including their titles, tags, and descriptions.
+3) Delete Notes: Remove notes and associated tags.
+4) Markdown Support: Use markdown syntax within the note descriptions.
+5) Persistent Storage: All notes and tags are saved in LocalStorage.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+React: A JavaScript library for building user interfaces.
+TypeScript: A typed superset of JavaScript that compiles to plain JavaScript.
+React Router DOM: Declarative routing for React applications.
+LocalStorage: Web storage to save notes data locally in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1) Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+git clone https://github.com/your-username/markdown-note-app.git
+cd markdown-note-app
 
-### `npm run build`
+2) Install the dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3) Start the development server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### npm start
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 1) Add a Note:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Click on the "Create" button.
+Enter the title, add tags, and description (supports markdown).
+Click "Save" to add the note.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 2) Edit a Note:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Click on the note you want to edit.
+Click "Edit", modify the title, tags, or description as needed.
+Click "Save" to update the note.
 
-## Learn More
+### 3) Delete a Note:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Click on the note you want to delete.
+Click the "Delete" button to remove the note.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4) View Notes:
+
+All saved notes are displayed on the homepage.
+Notes are saved in LocalStorage and will persist even after refreshing the page.
+
+## Contributing
+Contributions are welcome! Please create a pull request with a detailed description of your changes.
+
