@@ -56,30 +56,6 @@ Click the "Delete" button to remove the note.
 All saved notes are displayed on the homepage.
 Notes are saved in LocalStorage and will persist even after refreshing the page.
 
-## Folder Structure
-
-markdown-note-app/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── components/
-│   │   ├── Note.tsx
-│   │   ├── NoteList.tsx
-│   │   ├── NoteForm.tsx
-│   │   └── ...
-│   ├── pages/
-│   │   ├── Home.tsx
-│   │   ├── EditNote.tsx
-│   │   └── ...
-│   ├── App.tsx
-│   ├── index.tsx
-│   └── ...
-├── .gitignore
-├── package.json
-├── README.md
-└── tsconfig.json
-
 ## Contributing
 Contributions are welcome! Please create a pull request with a detailed description of your changes.
 
