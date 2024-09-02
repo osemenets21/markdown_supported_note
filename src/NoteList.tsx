@@ -2,8 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Button, Col, Row, Stack, Form, Card, Badge, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
-import { Tag, Note } from "./App";
-import { fetchNotes, fetchTags, updateTag, deleteTag } from "./api"; 
+import { Tag } from "./App";
 import styles from "./css/NoteList.css";
 
 type SimplifiedNote = {

@@ -61,59 +61,47 @@ function App() {
   }, [notes, tags]);
 
   async function onCreateNote({ tags, ...data }: NoteData) {
-    const newNoteId = uuidV4(); // You can use this to temporarily set the ID locally
+    const newNoteId = uuidV4(); 
     const newNote = { ...data, id: newNoteId, tagIds: tags.map((tag) => tag.id) };
 
-    // Create note in database
     await createNote(newNote);
 
-    // Update state with new note
     setNotes((prevNotes) => [...prevNotes, newNote]);
   }
 
   async function onUpdateNote(id: string, { tags, ...data }: NoteData) {
     const updatedNote = { ...data, id, tagIds: tags.map((tag) => tag.id) };
 
-    // Update note in database
     await updateNote(id, updatedNote);
 
-    // Update state with updated note
     setNotes((prevNotes) => {
       return prevNotes.map((note) => (note.id === id ? updatedNote : note));
     });
   }
 
   async function onDeleteNote(id: string) {
-    // Delete note from database
     await deleteNote(id);
 
-    // Update state to remove the note
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   }
 
   async function addTag(tag: Tag) {
-    // Create tag in database
     await createTag(tag);
 
-    // Update state with new tag
     setTags((prev) => [...prev, tag]);
   }
 
   async function updateTag(id: string, label: string) {
-    // Update tag in database
     await updateTagApi(id, label);
 
-    // Update state with updated tag
     setTags((prevTags) =>
       prevTags.map((tag) => (tag.id === id ? { ...tag, label } : tag))
     );
   }
 
   async function deleteTag(id: string) {
-    // Delete tag from database
     await deleteTagApi(id);
 
-    // Update state to remove the tag
     setTags((prevTags) => prevTags.filter((tag) => tag.id !== id));
   }
 
