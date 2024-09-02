@@ -11,6 +11,15 @@ export function NoteComponent({ onDelete }: NoteProps) {
   const note = useNote();
   const navigate = useNavigate();
 
+  if (!note) {
+    return <p>Note not found</p>; // Handle case when note is not found
+  }
+
+  const handleDelete = () => {
+    onDelete(note.id); // Call the delete function passed as a prop
+    navigate("/"); // Navigate to home after deletion
+  };
+
   return (
     <>
       <Row className="align-items-center mb-4">
@@ -32,15 +41,11 @@ export function NoteComponent({ onDelete }: NoteProps) {
               <Button variant="primary">Edit</Button>
             </Link>
             <Button
-              onClick={() => {
-                onDelete(note.id);
-                navigate("/");
-              }}
+              onClick={handleDelete} // Use the handleDelete function
               variant="outline-danger"
             >
               Delete
             </Button>
-
             <Link to="/">
               <Button variant="outline-secondary">Back</Button>
             </Link>

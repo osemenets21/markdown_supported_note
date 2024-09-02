@@ -6,17 +6,20 @@ type EditNoteProps = {
   onSubmit: (id: string, data: NoteData) => void;
   onAddTag: (tag: Tag) => void;
   availableTags: Tag[];
-} & Partial<NoteData>;
+};
 
 export function EditNote({
   onSubmit,
   onAddTag,
   availableTags,
-  title = "",
-  markdown = "",
-  tags = [],
 }: EditNoteProps) {
   const note = useNote();
+
+  // Handle the case when note is undefined (e.g., when the note is not found)
+  if (!note) {
+    return <p>Note not found</p>;
+  }
+
   return (
     <>
       <h1 className="mb-4">Edit Note</h1>

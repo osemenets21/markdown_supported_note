@@ -1,17 +1,9 @@
-import { useMemo, useState } from "react";
-import {
-  Button,
-  Col,
-  Row,
-  Stack,
-  Form,
-  Card,
-  Badge,
-  Modal,
-} from "react-bootstrap";
+import { useEffect, useMemo, useState } from "react";
+import { Button, Col, Row, Stack, Form, Card, Badge, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
-import { Tag } from "./App";
+import { Tag, Note } from "./App";
+import { fetchNotes, fetchTags, updateTag, deleteTag } from "./api"; 
 import styles from "./css/NoteList.css";
 
 type SimplifiedNote = {
@@ -23,8 +15,8 @@ type SimplifiedNote = {
 type NoteListProps = {
   availableTags: Tag[];
   notes: SimplifiedNote[];
-  onDeleteTag: (id: string) => void;
   onUpdateTag: (id: string, label: string) => void;
+  onDeleteTag: (id: string) => void;
 };
 
 type EditTagsModalProps = {
@@ -48,12 +40,9 @@ export function NoteList({
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
-        (title === "" ||
-          note.title.toLowerCase().includes(title.toLowerCase())) &&
+        (title === "" || note.title.toLowerCase().includes(title.toLowerCase())) &&
         (selectedTags.length === 0 ||
-          selectedTags.every((tag) =>
-            note.tags.some((noteTag: Tag) => noteTag.id === tag.id)
-          ))
+          selectedTags.every((tag) => note.tags.some((noteTag) => noteTag.id === tag.id)))
       );
     });
   }, [title, selectedTags, notes]);
@@ -94,17 +83,20 @@ export function NoteList({
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
-                value={selectedTags.map((tag) => {
-                  return { label: tag.label, value: tag.id };
-                })}
-                options={availableTags.map((tag) => {
-                  return { label: tag.label, value: tag.id };
-                })}
+                value={selectedTags.map((tag) => ({
+                  label: tag.label,
+                  value: tag.id
+                }))}
+                options={availableTags.map((tag) => ({
+                  label: tag.label,
+                  value: tag.id
+                }))}
                 onChange={(tags) => {
                   setSelectedTags(
-                    tags.map((tag) => {
-                      return { label: tag.label, id: tag.value };
-                    })
+                    tags.map((tag) => ({
+                      label: tag.label,
+                      id: tag.value
+                    }))
                   );
                 }}
                 isMulti
@@ -170,6 +162,12 @@ function EditTagsModal({
   onDeleteTag,
   onUpdateTag
 }: EditTagsModalProps) {
+  const [editedTags, setEditedTags] = useState<Tag[]>(availableTags);
+
+  useEffect(() => {
+    setEditedTags(availableTags);
+  }, [availableTags]);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -178,13 +176,34 @@ function EditTagsModal({
       <Modal.Body>
         <Form>
           <Stack gap={2}>
-            {availableTags.map((tag) => (
+            {editedTags.map((tag) => (
               <Row key={tag.id}>
                 <Col>
-                  <Form.Control type="text" value={tag.label} onChange={e => onUpdateTag(tag.id, e.target.value)}/>
+                  <Form.Control
+                    type="text"
+                    value={tag.label}
+                    onChange={(e) => {
+                      const newLabel = e.target.value;
+                      setEditedTags((prevTags) =>
+                        prevTags.map((t) =>
+                          t.id === tag.id ? { ...t, label: newLabel } : t
+                        )
+                      );
+                    }}
+                  />
                 </Col>
                 <Col xs="auto">
-                  <Button onClick={() => {onDeleteTag(tag.id)}} variant="outline-danger">&times;</Button>
+                  <Button
+                    onClick={() => {
+                      onDeleteTag(tag.id);
+                      setEditedTags((prevTags) =>
+                        prevTags.filter((t) => t.id !== tag.id)
+                      );
+                    }}
+                    variant="outline-danger"
+                  >
+                    &times;
+                  </Button>
                 </Col>
               </Row>
             ))}
