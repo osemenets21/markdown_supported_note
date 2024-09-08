@@ -21,7 +21,7 @@ LocalStorage: Web storage to save notes data locally in the browser.
 
 1) Clone the repository:
 
-git clone https://github.com/your-username/markdown-note-app.git
+git clone https://github.com/osemenets21/markdown-note-app.git
 cd markdown-note-app
 
 2) Install the dependencies:
