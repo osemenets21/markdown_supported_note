@@ -33,8 +33,8 @@ export function NoteForm({
       tags: selectedTags,
     };
 
-    await onSubmit(newNoteData); // Викликаємо onSubmit і чекаємо на завершення
-    navigate(".."); // Навігація назад до головної сторінки
+    await onSubmit(newNoteData); 
+    navigate("..");
   }
 
   return (

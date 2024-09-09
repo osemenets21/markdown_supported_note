@@ -8,7 +8,7 @@ import { NoteList } from "./NoteList";
 import { NoteLayout } from "./NoteLayout";
 import { NoteComponent } from "./Note";
 import { EditNote } from "./EditNote";
-import { fetchNotes, fetchTags, createNote, updateNote, deleteNote, createTag, updateTag as updateTagApi, deleteTag as deleteTagApi } from "./api";
+import { fetchNotes, createNote, updateNote, deleteNote, createTag, updateTag as updateTagApi, deleteTag as deleteTagApi } from "./api";
 
 export type Note = {
   id: string;
@@ -43,9 +43,7 @@ function App() {
   useEffect(() => {
     const loadNotesAndTags = async () => {
       const fetchedNotes = await fetchNotes();
-      const fetchedTags = await fetchTags();
       setNotes(fetchedNotes);
-      setTags(fetchedTags);
     };
 
     loadNotesAndTags();
