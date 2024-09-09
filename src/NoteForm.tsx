@@ -36,6 +36,7 @@ export function NoteForm({
     await onSubmit(newNoteData); 
     navigate("..");
   }
+  
 
   return (
     <Form onSubmit={handleSubmit}>
